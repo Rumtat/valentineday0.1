@@ -1,0 +1,246 @@
+/* ตั้งค่าให้เนื้อหาทั้งหมดอยู่ตรงกลาง */
+body {
+  font-family: 'Sriracha', sans-serif;
+  text-align: center;
+  background-color: #fff0f5;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* พื้นหลังสีชมพูอ่อนสำหรับทั้งหน้า */
+.bg-pink {
+  background-color: #ffeff1;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* ซ่อนเนื้อหาหลักก่อนตอบคำถาม */
+.hidden {
+  display: none;
+}
+
+/* หน้าแรก (คำถามก่อนเข้าเว็บ) */
+#question-screen, #main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+h1, h2 {
+  font-size: 24px;
+  color: #ff4081;
+  margin-bottom: 20px;
+}
+
+/* ปรับการจัดการรูปภาพในรูปแบบ Grid */
+/* ปรับสไตล์สำหรับกริดของรูปภาพ */
+/* ปรับสไตล์สำหรับกริดของรูปภาพ */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* กำหนดคอลัมน์ให้ยืดหยุ่น */
+  gap: 20px; /* ระยะห่างระหว่างรูปภาพ */
+  justify-items: center;
+  padding: 10px;
+  width: 100%;
+}
+
+/* ปรับขนาดและการแสดงผลรูปภาพให้เท่ากัน */
+.grid-item {
+  width: 100%; 
+  height: 200px; /* กำหนดความสูงของรูปภาพให้เท่ากัน */
+  max-width: 250px; /* กำหนดขนาดสูงสุดของรูปภาพ */
+  object-fit: cover; /* ปรับรูปให้เต็มพื้นที่และครอบคลุม */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: fadeIn 1s forwards; /* เพิ่มแอนิเมชันให้รูปค่อยๆ ปรากฏ */
+  transition: transform 0.3s ease-in-out;
+}
+
+.grid-item:hover {
+  transform: scale(1.05); /* ขยายรูปภาพเล็กน้อยเมื่อ hover */
+}
+
+/* แอนิเมชันค่อยๆ ปรากฏ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* การแสดงผลภาพใน img.html */
+#surprise-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+#surprise-container img {
+  max-width: 90%;
+  height: auto;
+  border-radius: 10px;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+/* การปรับสไตล์ปุ่ม */
+button, .btn {
+  background-color: #ffafcc;
+  color: white;
+  font-size: 18px;
+  padding: 12px 25px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover, .btn:hover {
+  background-color: #ff85a2;
+  transform: scale(1.1);
+}
+
+/* เพิ่มแอนิเมชันให้ข้อความพิเศษ */
+.special-message {
+  font-size: 1.2rem;
+  color: #ff4081;
+  opacity: 0;
+  animation: slideIn 2s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* เพิ่มแอนิเมชันให้รูปภาพค่อยๆ ปรากฏ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* สไตล์การ์ดในหน้า img.html */
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-body {
+  background-color: #fce4ec;
+  border-radius: 0 0 10px 10px;
+}
+
+.card-text {
+  font-size: 1.2rem;
+  color: #d81b60;
+  font-weight: bold;
+}
+
+/* การจัดรูปภาพให้กระจายกัน */
+#surprise-image {
+  max-width: 90%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* การจัดเรียงปุ่ม */
+button, .btn {
+  background-color: #ffafcc;
+  color: white;
+  font-size: 18px;
+  padding: 12px 25px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover, .btn:hover {
+  background-color: #ff85a2;
+  transform: scale(1.1);
+}
+/* สไตล์พื้นฐานของการ์ด */
+.card {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffafcc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  margin: 10px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-option {
+  display: inline-block;
+  margin: 10px;
+}
+
+/* สไตล์เมื่อเลือกการ์ด */
+.selected {
+  background-color: #ff85a2;
+}
+
+/* สไตล์ข้อความในการ์ด */
+.card p {
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+}
+
+/* จัดตำแหน่งคำถาม */
+.question {
+  text-align: center;
+  margin-top: 50px;
+}
+.hidden {
+  display: none;
+}
+
+.feedback {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+.surprise-image {
+  max-width: 100%; /* ให้รูปไม่กว้างเกินขนาดหน้าจอ */
+  height: auto; /* ให้ปรับขนาดอัตโนมัติ */
+  display: block;
+  margin: 0 auto; /* จัดกึ่งกลาง */
+  border-radius: 20px; /* ทำให้มุมมน (ถ้าต้องการ) */
+}

@@ -1,0 +1,169 @@
+<!-- memory_game.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sriracha&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Matching Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sriracha', sans-serif;
+  text-align: center;
+  background-color: #fff0f5;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+        }
+        .game-container {
+            margin-top: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .memory-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .memory-card {
+            width: 100px;
+            height: 100px;
+            background-color: #ffb3b3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .memory-card img {
+            width: 70%;
+            height: auto;
+            display: none;
+            border-radius: 10px;
+        }
+        .memory-card.flipped img {
+            display: block;
+        }
+        .memory-card.matched {
+            background-color: #c8e6c9;
+        }
+        .game-message {
+            font-size: 24px;
+            color: #e43b44;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container game-container">
+        <h2>เกมจับคู่ภาพแสนสนุก</h2>
+        <p>ขอให้สนุกงับบ</p>
+        <div class="memory-board" id="memory-board">
+            <!-- Cards will be dynamically added here -->
+        </div>
+
+        <div class="game-message" id="game-message"></div>
+        <button class="btn btn-light mt-4" onclick="startNewGame()">Start New Game</button>
+    </div>
+
+    <script>
+        // Array of images to be used for the cards
+        const images = ['V1/b1.jpg', 'V1/b2.jpg', 'V1/b3.jpg', 'V1/b4.jpg', 'V1/b5.jpg', 'V1/b6.jpg',];
+        
+        let gameBoard = []; // Array to store the cards
+        let flippedCards = []; // Array to store flipped cards
+        let matchedCards = 0; // Counter for matched cards
+        let totalCards = images.length * 2; // Total number of cards (each image appears twice)
+
+        // Function to shuffle the cards
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+        }
+
+        // Function to create the memory game cards
+        function createBoard() {
+            gameBoard = [...images, ...images]; // Duplicate the images to create pairs
+            shuffle(gameBoard); // Shuffle the array
+            
+            const boardElement = document.getElementById('memory-board');
+            boardElement.innerHTML = ''; // Clear the board before generating new cards
+
+            gameBoard.forEach((image, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.classList.add('memory-card');
+                cardElement.setAttribute('data-index', index);
+
+                const imgElement = document.createElement('img');
+                imgElement.src = image;
+                imgElement.alt = 'Card Image';
+
+                cardElement.appendChild(imgElement);
+                cardElement.addEventListener('click', flipCard);
+                boardElement.appendChild(cardElement);
+            });
+        }
+
+        // Function to flip the card
+        function flipCard(event) {
+            const card = event.target.closest('.memory-card');
+            if (card.classList.contains('flipped') || flippedCards.length === 2) return;
+
+            card.classList.add('flipped');
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                checkForMatch();
+            }
+        }
+
+        // Function to check if the two flipped cards match
+        function checkForMatch() {
+            const [card1, card2] = flippedCards;
+            const image1 = card1.querySelector('img').src;
+            const image2 = card2.querySelector('img').src;
+
+            if (image1 === image2) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedCards++;
+                if (matchedCards === images.length) {
+                    document.getElementById('game-message').textContent = "You won! 🎉";
+                }
+            } else {
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                }, 1000);
+            }
+            flippedCards = [];
+        }
+
+        // Function to start a new game
+        function startNewGame() {
+            matchedCards = 0;
+            flippedCards = [];
+            document.getElementById('game-message').textContent = '';
+            createBoard(); // Recreate the shuffled board
+        }
+
+        // Initialize the game when the page loads
+        window.onload = startNewGame;
+    </script>
+
+</body>
+</html>
