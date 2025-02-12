@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function() {
  // กำหนดรูปภาพและข้อความที่จะเปลี่ยนไปตามลำดับ
  const images = [
   { src: 'V1/I1.jpg', text: 'This is the first surprise! 💖' },
-  { src: 'V1/I2.jpg', text: 'แต่สิ่งนี้คือของขวัญที่เค้าทำให้เบ้บนะ' },
-  { src: 'V1/I3.jpg', text: 'ราคาอาจไม่ได้แพงแต่เค้าตั้งใจทำให้เบ้บนะ เค้ารักเบ้บ' }
+  { src: 'V1 /I2.jpg', text: 'แต่สิ่งนี้คือของขวัญที่เค้าทำให้เบ้บนะ' },
+  { src: 'V1 /I3.jpg', text: 'ราคาอาจไม่ได้แพงแต่เค้าตั้งใจทำให้เบ้บนะ เค้ารักเบ้บ' }
 ];
 
 let currentIndex = 0; // เริ่มต้นที่รูปแรก
